@@ -13,6 +13,9 @@ module.exports = {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
+  css: [
+    { src: '~assets/scss/app.scss', lang: 'scss' }
+  ],
   /*
   ** Customize the progress-bar color
   */
@@ -21,6 +24,7 @@ module.exports = {
   ** Build configuration
   */
   build: {
+    vendor: ['axios'],
     /*
     ** Run ESLINT on save
     */

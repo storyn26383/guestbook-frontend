@@ -23,9 +23,9 @@ export default async ({ isServer, store, req }) => {
 
       let { data } = await axios.get('http://localhost:8000/api/me')
 
-      store.commit('setUser', data)
+      store.commit('user/set', data)
     } catch (e) {
-      store.commit('unsetUser')
+      store.commit('user/unset')
     }
   }
 }

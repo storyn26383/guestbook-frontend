@@ -4,30 +4,29 @@
 
     .card
       .card-body
-        form
-          textarea.form-control(placeholder="Say something...", required)
+        editor
 
-    .card.mt-3
-      .card-body
-        .post
-          p.card-text.small.text-muted.float-right 1970-01-01 08:00:00 by Someone
-          p.card-text Hello World
-          hr
-        .post
-          p.card-text.small.text-muted.float-right 1970-01-01 08:00:00 by Someone
-          p.card-text Hello World
-          hr
-        .post
-          p.card-text.small.text-muted.float-right 1970-01-01 08:00:00 by Someone
-          p.card-text Hello World
-          hr
-        form
-          textarea.form-control(placeholder="Write a comment...", required)
+    .card.mt-3(:key="post.id", v-for="post in posts")
+      .card-body.pb-1
+        post(:post="post")
 </template>
 
 <script>
+  import { mapGetters } from 'vuex'
+  import Post from '~/components/Post'
+  import Editor from '~/components/Editor'
+
   export default {
     layout: 'app',
-    middleware: ['auth']
+    middleware: ['auth'],
+    components: { Post, Editor },
+    created () {
+      this.$store.dispatch('post/list')
+    },
+    computed: {
+      ...mapGetters({
+        posts: 'post/list'
+      })
+    }
   }
 </script>

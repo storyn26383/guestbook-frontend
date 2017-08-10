@@ -16,6 +16,21 @@
       nuxt
 </template>
 
+<script>
+  import axios from 'axios'
+  import Cookie from 'js-cookie'
+
+  export default {
+    created () {
+      let token = Cookie.get('api_token')
+
+      if (token) {
+        axios.defaults.headers.common['API_TOKEN'] = token
+      }
+    }
+  }
+</script>
+
 <style lang="scss">
   .app {
     padding-top: 80px;

@@ -16,6 +16,9 @@ module.exports = {
   css: [
     { src: '~assets/scss/app.scss', lang: 'scss' }
   ],
+  router: {
+    middleware: ['check-auth']
+  },
   /*
   ** Customize the progress-bar color
   */
@@ -24,7 +27,7 @@ module.exports = {
   ** Build configuration
   */
   build: {
-    vendor: ['axios'],
+    vendor: ['axios', 'js-cookie'],
     /*
     ** Run ESLINT on save
     */

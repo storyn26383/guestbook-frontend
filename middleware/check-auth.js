@@ -6,8 +6,9 @@ export default async ({ isServer, store, req }) => {
 
   if (isServer) {
     let cookies = {}
+    let cookie = req.headers.cookie || ''
 
-    req.headers.cookie.split(';').map(cookie => cookie.trim().split('=')).forEach(([key, value]) => {
+    cookie.split(';').map(cookie => cookie.trim().split('=')).forEach(([key, value]) => {
       cookies[key] = value
     })
 
@@ -17,10 +18,14 @@ export default async ({ isServer, store, req }) => {
   }
 
   if (token) {
-    axios.defaults.headers.common['API_TOKEN'] = token
+    try {
+      axios.defaults.headers.common['API_TOKEN'] = token
 
-    let { data } = await axios.get('http://localhost:8000/api/me')
+      let { data } = await axios.get('http://localhost:8000/api/me')
 
-    store.commit('setUser', data)
+      store.commit('setUser', data)
+    } catch (e) {
+      store.commit('unsetUser')
+    }
   }
 }

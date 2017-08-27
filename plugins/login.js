@@ -3,12 +3,18 @@ import Cookie from 'js-cookie'
 
 export default {
   methods: {
-    async login (email, password) {
-      let { data } = await axios.post('api/login', { email, password })
+    login (email, password) {
+      return new Promise((resolve, reject) => {
+        axios.post('api/login', { email, password })
+          .then(({ data }) => {
+            Cookie.set('api_token', data.api_token)
 
-      Cookie.set('api_token', data.api_token)
-
-      this.$router.push('/')
+            this.$router.push('/')
+          })
+          .catch(e => {
+            reject(e)
+          })
+      })
     }
   }
 }

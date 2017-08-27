@@ -2,6 +2,8 @@
   .login.row.justify-content-center
     form.col-4(@submit.stop.prevent="submit")
       h1.mb-3 Login
+      .alert.alert-danger(v-if="error")
+        | {{ error }}
       .form-group
         label(for="email") Email
         input#email.form-control(type="email", v-model="form.email", :disabled="loading", required)
@@ -21,6 +23,7 @@
     data () {
       return {
         loading: false,
+        error: '',
         form: {
           email: '',
           password: ''
@@ -28,10 +31,16 @@
       }
     },
     methods: {
-      submit () {
+      async submit () {
         this.loading = true
 
-        this.login(this.form.email, this.form.password)
+        try {
+          await this.login(this.form.email, this.form.password)
+        } catch (e) {
+          this.loading = false
+
+          this.error = e.response.data.error.message
+        }
       }
     }
   }

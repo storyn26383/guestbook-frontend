@@ -2,6 +2,8 @@
   .register
     form(@submit.stop.prevent="submit")
       h1.mb-3 Register
+      .alert.alert-danger(v-if="error")
+        | {{ error }}
       .form-group
         label(for="name") Name
         input#name.form-control(v-model="form.name", :disabled="loading", required)
@@ -18,6 +20,7 @@
 </template>
 
 <script>
+  import _ from 'lodash'
   import axios from 'axios'
   import login from '~/plugins/login'
 
@@ -28,6 +31,7 @@
     data () {
       return {
         loading: false,
+        error: '',
         form: {
           name: '',
           email: '',
@@ -40,13 +44,23 @@
       async submit () {
         this.loading = true
 
-        await axios.post('/api/register', {
-          name: this.form.name,
-          email: this.form.email,
-          password: this.form.password
-        })
+        try {
+          await axios.post('/api/register', {
+            name: this.form.name,
+            email: this.form.email,
+            password: this.form.password
+          })
 
-        this.login(this.form.email, this.form.password)
+          await this.login(this.form.email, this.form.password)
+        } catch (e) {
+          this.loading = false
+
+          if (e.response.data.error) {
+            this.error = e.response.data.error.message
+          } else {
+            this.error = _.map(e.response.data, Array.pop).pop()
+          }
+        }
       }
     }
   }

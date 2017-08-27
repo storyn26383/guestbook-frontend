@@ -12,7 +12,7 @@
 </template>
 
 <script>
-  import login from '~plugins/login'
+  import login from '~/plugins/login'
 
   export default {
     layout: 'app',

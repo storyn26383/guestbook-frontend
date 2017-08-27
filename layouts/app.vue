@@ -1,17 +1,17 @@
 <template lang="pug">
   .app
-    .navbar.navbar-inverse.bg-inverse.fixed-top.bg-faded.navbar-toggleable-xl
+    .navbar.navbar-dark.bg-dark.fixed-top
       nuxt-link.navbar-brand(to="/") Vue.js Workshop #3
-      ul.navbar-nav.mr-auto
+      ul.nav.mr-auto
         li.nav-item(v-if="!$store.state.user.guest")
-          nuxt-link.nav-link(to="/guestbook") Guestbook
-      ul.navbar-nav
+          nuxt-link.nav-link.text-white(to="/guestbook") Guestbook
+      ul.nav
         li.nav-item(v-if="$store.state.user.guest")
-          nuxt-link.nav-link(to="/register") Register
+          nuxt-link.nav-link.text-white(to="/register") Register
         li.nav-item(v-if="$store.state.user.guest")
-          nuxt-link.nav-link(to="/login") Login
+          nuxt-link.nav-link.text-white(to="/login") Login
         li.nav-item(v-if="!$store.state.user.guest")
-          nuxt-link.nav-link(to="/logout") Logout
+          nuxt-link.nav-link.text-white(to="/logout") Logout
     .container
       nuxt
 </template>

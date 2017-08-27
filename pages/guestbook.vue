@@ -3,12 +3,12 @@
     h1.mb-3 Guestbook
 
     .card
-      .card-block
+      .card-body
         form
           textarea.form-control(placeholder="Say something...", required)
 
     .card.mt-3
-      .card-block
+      .card-body
         .post
           p.card-text.small.text-muted.float-right 1970-01-01 08:00:00 by Someone
           p.card-text Hello World

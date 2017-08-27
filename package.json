@@ -14,10 +14,10 @@
   },
   "dependencies": {
     "axios": "^0.16.2",
-    "bootstrap": "^4.0.0-alpha.6",
+    "bootstrap": "^4.0.0-beta",
     "js-cookie": "^2.1.4",
     "node-sass": "^4.5.3",
-    "nuxt": "^1.0.0-rc3",
+    "nuxt": "latest",
     "pug": "^2.0.0-rc.3",
     "sass-loader": "^6.0.6"
   },

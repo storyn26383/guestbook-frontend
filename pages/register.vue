@@ -19,7 +19,7 @@
 
 <script>
   import axios from 'axios'
-  import login from '~plugins/login'
+  import login from '~/plugins/login'
 
   export default {
     layout: 'app',

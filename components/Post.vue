@@ -1,7 +1,7 @@
 <template lang="pug">
   .post
     p.card-text.small.text-muted.float-right
-      | {{ moment(post.created_at).format('YYYY-MM-DD hh:mm:ss') }} by {{ post.user.name }}
+      | {{ moment(post.created_at).format('YYYY-MM-DD HH:mm:ss') }} by {{ post.user.name }}
     p.card-text(v-html="post.content.replace(/\\n/g, '<br>')")
     hr
     post.ml-4(:key="reply.id", :post="reply", v-for="reply in post.children")
